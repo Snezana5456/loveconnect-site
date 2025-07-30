@@ -1841,4 +1841,33 @@
                 button.disabled = false;
                 
                 showNotification(`Successfully upgraded to ${plans[selectedPlan].name}! 🎉`, 's
-                                 <body>
+                              <script type="module">
+ <script type="module" defer>
+  // твой Supabase код
+</script>
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+  const supabaseUrl = 'https://nokggxwhycdvjrrjkugej.supabase.co'
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5va2dneHdoeWNkdmpyamt1Z2VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4OTM4NTMsImV4cCI6MjA2OTQ2OTg1M30.h3FBLy-vFilgVcKKS_zXixBjRmYYSLFk94fIVQi_MwQ'
+
+  const supabase = createClient(supabaseUrl, supabaseKey)
+
+  document.getElementById('btnSignUp').addEventListener('click', async () => {
+    const email = document.getElementById('email').value
+    const password = document.getElementById('password').value
+
+    // Здесь можно использовать встроенную авторизацию Supabase
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password
+    })
+
+    if (error) {
+      alert('Ошибка регистрации: ' + error.message)
+    } else {
+      alert('Вы успешно зарегистрированы! 🎉')
+    }
+  })
+</script>
+</body>
