@@ -8,9 +8,1852 @@
   <p>Сайт успешно размещён через GitHub Pages!</p>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveConnect - Find Your Perfect Match</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #ff6b8a;
+            --secondary-color: #4facfe;
+            --accent-color: #f093fb;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #666;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 138, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 138, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ff6b8a" stop-opacity="0.1"/><stop offset="100%" stop-color="%234facfe" stop-opacity="0.05"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"><animate attributeName="r" values="100;150;100" dur="4s" repeatCount="indefinite"/></circle><circle cx="800" cy="300" r="120" fill="url(%23a)"><animate attributeName="r" values="120;180;120" dur="5s" repeatCount="indefinite"/></circle><circle cx="300" cy="800" r="80" fill="url(%23a)"><animate attributeName="r" values="80;130;80" dur="3s" repeatCount="indefinite"/></circle></svg>') center/cover;
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            animation: fadeInUp 1s ease 0.4s both;
+            gap: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 30px;
+            padding: 4rem 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Profiles Section */
+        .profiles {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            margin: 2rem 0;
+            border-radius: 30px;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .profile-image {
+            height: 250px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+        }
+
+        .profile-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.3));
+        }
+
+        .online-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 20px;
+            height: 20px;
+            background: var(--success-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+
+        .profile-info {
+            padding: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .profile-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .verified-badge {
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+
+        .profile-age {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .profile-bio {
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-like {
+            flex: 1;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-like:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-message {
+            flex: 1;
+            background: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+            padding: 0.75rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-message:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 138, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Chat Interface */
+        .chat-interface {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+            flex-direction: column;
+            z-index: 1500;
+        }
+
+        .chat-header {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-input button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 20px;
+            max-width: 80%;
+        }
+
+        .message.sent {
+            background: var(--secondary-color);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.received {
+            background: #f1f3f4;
+            color: var(--text-dark);
+            border-bottom-left-radius: 5px;
+        }
+
+        /* Notification System */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 3000;
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .notification.error {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 30px;
+            padding: 4rem 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--warning-color);
+            color: var(--dark-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.featured:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-period {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card.featured .pricing-period {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .pricing-card.featured .pricing-features li::before {
+            color: white;
+        }
+
+        .pricing-features li.disabled {
+            opacity: 0.5;
+        }
+
+        .pricing-features li.disabled::before {
+            content: '✗';
+            color: var(--danger-color);
+        }
+
+        .pricing-card.featured .pricing-features li.disabled::before {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Success Stories */
+        .success-stories {
+            background: linear-gradient(135deg, var(--success-color) 0%, #20c997 100%);
+            margin: 2rem 0;
+            border-radius: 30px;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            color: var(--text-dark);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .testimonial-text {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .testimonial-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info span {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Premium Badge */
+        .premium-badge {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+        }
+
+        /* Subscription Status */
+        .subscription-status {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            margin-left: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .subscription-status.free {
+            background: rgba(255, 193, 7, 0.2);
+            color: #856404;
+        }
+
+        .subscription-status.premium {
+            background: rgba(255, 215, 0, 0.2);
+            color: #b8860b;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #bbb;
+        }
+
+        /* Premium Features Overlay */
+        .premium-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .premium-overlay.show {
+            opacity: 1;
+        }
+
+        .premium-unlock {
+            text-align: center;
+            color: white;
+        }
+
+        .premium-unlock h3 {
+            margin-bottom: 1rem;
+            color: var(--warning-color);
+        }
+
+        /* Payment Modal */
+        .payment-modal .modal-content {
+            max-width: 600px;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .payment-option {
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-option:hover,
+        .payment-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(255, 107, 138, 0.05);
+        }
+
+        .payment-option img {
+            width: 60px;
+            height: 40px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .features-grid,
+            .profiles-grid,
+            .pricing-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .chat-interface {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+            }
+
+            .subscription-status {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .spinner {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">💕 LoveConnect</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="scrollToSection('features')">Features</a></li>
+                <li><a href="#" onclick="scrollToSection('profiles')">Profiles</a></li>
+                <li><a href="#" onclick="scrollToSection('pricing')">Pricing</a></li>
+                <li><a href="#" onclick="showMatchSystem()">Match</a></li>
+                <li><a href="#" onclick="toggleChat()">Chat</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-secondary" onclick="openModal('loginModal')">Login</button>
+                <button class="btn btn-primary" onclick="openModal('signupModal')">Sign Up</button>
+            </div>
+            <div class="user-info">
+                <div class="subscription-status free">Free Plan</div>
+                <span class="user-name">Welcome back!</span>
+                <div class="user-avatar" onclick="toggleUserMenu()">JD</div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Find Your Perfect Match</h1>
+                    <p>Connect with amazing people who share your interests, values, and dreams. Your love story starts here.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="openModal('signupModal')">Start Your Journey</button>
+                        <button class="btn btn-ghost" onclick="showDemo()">See How It Works</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="50000">0</span>
+                            <span class="stat-label">Happy Couples</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="1000000">0</span>
+                            <span class="stat-label">Active Users</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="150">0</span>
+                            <span class="stat-label">Countries</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose LoveConnect?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Smart Matching</h3>
+                        <p>Our advanced algorithm analyzes your preferences, personality, and behavior to find your perfect match with 95% accuracy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Safe & Secure</h3>
+                        <p>Your privacy is our priority. All profiles are verified, and your data is protected with end-to-end encryption.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Real-time Chat</h3>
+                        <p>Connect instantly with your matches through our seamless messaging system with photo and video sharing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+<section id="auth-section">
+  <div class="container">
+    <h2 class="section-title">Вход / Регистрация</h2>
+    <div class="form-group">
+      <input type="email" id="email" placeholder="Email" class="form-input" />
+    </div>
+    <div class="form-group">
+      <input type="password" id="password" placeholder="Пароль" class="form-input" />
+    </div>
+    <div class="form-group" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <button class="btn btn-primary" id="btnSignUp">Зарегистрироваться</button>
+      <button class="btn btn-secondary" id="btnSignIn">Войти</button>
+    </div>
+
+    <hr style="margin: 2rem 0;" />
+
+    <div class="form-group" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      <button class="btn btn-primary" id="btnGoogle">Войти с Google</button>
+      <button class="btn btn-primary" id="btnFacebook" style="background: #3b5998;">Войти с Facebook</button>
+    </div>
+  </div>
+</section>
 
 
+        <section class="profiles" id="profiles">
+            <div class="container">
+                <h2 class="section-title">Meet Amazing People</h2>
+                <div class="profiles-grid">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            👩🏻‍💼
+                            <div class="online-status"></div>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-name">
+                                Sarah Johnson
+                                <span class="verified-badge">✓</span>
+                                <span class="premium-badge">PREMIUM</span>
+                            </div>
+                            <div class="profile-age">28 years old</div>
+                            <div class="profile-bio">Marketing professional who loves hiking, photography, and trying new cuisines. Looking for genuine connections.</div>
+                            <div class="profile-tags">
+                                <span class="tag">Adventure</span>
+                                <span class="tag">Foodie</span>
+                                <span class="tag">Photography</span>
+                            </div>
+                            <div class="profile-actions">
+                                <button class="btn-like" onclick="likeProfile('sarah')">💕 Like</button>
+                                <button class="btn-message" onclick="startChat('sarah')">💬 Message</button>
+                            </div>
+                            <div class="premium-overlay" id="overlay-sarah">
+                                <div class="premium-unlock">
+                                    <h3>🔒 Premium Feature</h3>
+                                    <p>Upgrade to Premium to send unlimited messages</p>
+                                    <button class="btn btn-primary" onclick="openModal('paymentModal')">Upgrade Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            👨🏽‍💻
+                            <div class="online-status"></div>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-name">
+                                Michael Chen
+                                <span class="verified-badge">✓</span>
+                            </div>
+                            <div class="profile-age">32 years old</div>
+                            <div class="profile-bio">Software engineer passionate about technology, music, and travel. Seeking someone to explore the world with.</div>
+                            <div class="profile-tags">
+                                <span class="tag">Tech</span>
+                                <span class="tag">Music</span>
+                                <span class="tag">Travel</span>
+                            </div>
+                            <div class="profile-actions">
+                                <button class="btn-like" onclick="likeProfile('michael')">💕 Like</button>
+                                <button class="btn-message" onclick="startChat('michael')">💬 Message</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            👩🏾‍🎨
+                            <div class="online-status"></div>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-name">
+                                Emma Williams
+                                <span class="verified-badge">✓</span>
+                            </div>
+                            <div class="profile-age">26 years old</div>
+                            <div class="profile-bio">Artist and yoga instructor. Love creating beautiful things and helping others find their inner peace.</div>
+                            <div class="profile-tags">
+                                <span class="tag">Art</span>
+                                <span class="tag">Yoga</span>
+                                <span class="tag">Wellness</span>
+                            </div>
+                            <div class="profile-actions">
+                                <button class="btn-like" onclick="likeProfile('emma')">💕 Like</button>
+                                <button class="btn-message" onclick="startChat('emma')">💬 Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <h2 class="section-title">Choose Your Plan</h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem; font-size: 1.1rem;">
+                    Unlock premium features and find your perfect match faster
+                </p>
+                <div class="pricing-grid">
+                    <!-- Free Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-title">Free</div>
+                        <div class="pricing-price">$0</div>
+                        <div class="pricing-period">Forever</div>
+                        <ul class="pricing-features">
+                            <li>Basic profile creation</li>
+                            <li>Limited daily likes (5)</li>
+                            <li>Basic matching</li>
+                            <li>Standard support</li>
+                            <li class="disabled">Unlimited likes</li>
+                            <li class="disabled">Advanced filters</li>
+                            <li class="disabled">See who liked you</li>
+                            <li class="disabled">Priority support</li>
+                        </ul>
+                        <button class="btn btn-secondary" style="width: 100%;" onclick="selectPlan('free')">
+                            Current Plan
+                        </button>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="pricing-card featured">
+                        <div class="pricing-title">Premium</div>
+                        <div class="pricing-price">$19.99</div>
+                        <div class="pricing-period">per month</div>
+                        <ul class="pricing-features">
+                            <li>Everything in Free</li>
+                            <li>Unlimited likes</li>
+                            <li>Advanced filters</li>
+                            <li>See who liked you</li>
+                            <li>Priority support</li>
+                            <li>Read receipts</li>
+                            <li>Boost your profile</li>
+                            <li>Video calls</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%; background: white; color: var(--primary-color);" onclick="selectPlan('premium')">
+                            Upgrade Now
+                        </button>
+                    </div>
+
+                    <!-- VIP Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-title">VIP</div>
+                        <div class="pricing-price">$39.99</div>
+                        <div class="pricing-period">per month</div>
+                        <ul class="pricing-features">
+                            <li>Everything in Premium</li>
+                            <li>Personal matchmaker</li>
+                            <li>Profile verification</li>
+                            <li>Exclusive events access</li>
+                            <li>24/7 priority support</li>
+                            <li>Custom profile badge</li>
+                            <li>Advanced analytics</li>
+                            <li>Relationship coaching</li>
+                        </ul>
+                        <button class="btn btn-secondary" style="width: 100%;" onclick="selectPlan('vip')">
+                            Go VIP
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Stories -->
+        <section class="success-stories">
+            <div class="container">
+                <h2 class="section-title">Success Stories</h2>
+                <p style="text-align: center; margin-bottom: 2rem; opacity: 0.9; font-size: 1.1rem;">
+                    Real couples who found love on LoveConnect
+                </p>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "We matched on LoveConnect six months ago, and now we're planning our wedding! The app's algorithm is incredible - it really understood what we were looking for in each other."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">JS</div>
+                            <div class="testimonial-info">
+                                <h4>Jessica & Sam</h4>
+                                <span>Married after 8 months</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "I was skeptical about dating apps, but LoveConnect changed my mind. The quality of matches was outstanding, and I found my soulmate within just 3 weeks!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">MA</div>
+                            <div class="testimonial-info">
+                                <h4>Mike & Anna</h4>
+                                <span>Together for 2 years</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The premium features were worth every penny. Being able to see who liked me and use advanced filters helped me find someone who truly complements my lifestyle."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">LR</div>
+                            <div class="testimonial-info">
+                                <h4>Lisa & Robert</h4>
+                                <span>Engaged after 1 year</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>LoveConnect</h3>
+                    <p>Find your perfect match with our advanced matching algorithm and premium features.</p>
+                    <div style="margin-top: 1rem;">
+                        <span style="font-size: 1.5rem;">💕❤️💖</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#features">Features</a>
+                    <a href="#profiles">Browse Profiles</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#" onclick="openModal('signupModal')">Sign Up</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Safety Tips</a>
+                    <a href="#">Report a User</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                    <a href="#">Community Guidelines</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LoveConnect. All rights reserved. Made with ❤️ for finding love.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Welcome Back!</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Don't have an account? <a href="#" onclick="closeModal('loginModal'); openModal('signupModal')" style="color: var(--primary-color);">Sign up here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Join LoveConnect</h2>
+            <form onsubmit="handleSignup(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="birthDate">Birth Date</label>
+                        <input type="date" id="birthDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bio">Tell us about yourself</label>
+                    <textarea id="bio" rows="3" placeholder="Write a short bio..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Already have an account? <a href="#" onclick="closeModal('signupModal'); openModal('loginModal')" style="color: var(--primary-color);">Login here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal payment-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('paymentModal')">&times;</span>
+            <h2>Upgrade to Premium</h2>
+            <div style="text-align: center; margin: 1rem 0;">
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-color);">$19.99/month</div>
+                <div style="color: var(--text-light);">Unlock all premium features</div>
+            </div>
+            
+            <div style="background: #f8f9fa; border-radius: 15px; padding: 1.5rem; margin: 1.5rem 0;">
+                <h4 style="margin-bottom: 1rem; color: var(--primary-color);">What you'll get:</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">✓ Unlimited likes and super likes</li>
+                    <li style="margin-bottom: 0.5rem;">✓ See who liked your profile</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Advanced search filters</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Read receipts and priority support</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Profile boost and video calls</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Choose Payment Method</h3>
+            <div class="payment-options">
+                <div class="payment-option" onclick="selectPaymentMethod('stripe')">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💳</div>
+                    <div>Credit Card</div>
+                    <div style="font-size: 0.8rem; color: var(--text-light);">Visa, MasterCard</div>
+                </div>
+                <div class="payment-option" onclick="selectPaymentMethod('paypal')">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🅿️</div>
+                    <div>PayPal</div>
+                    <div style="font-size: 0.8rem; color: var(--text-light);">Secure payments</div>
+                </div>
+                <div class="payment-option" onclick="selectPaymentMethod('google')">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                    <div>Google Pay</div>
+                    <div style="font-size: 0.8rem; color: var(--text-light);">One-click pay</div>
+                </div>
+            </div>
+
+            <div id="stripe-form" style="display: none; margin-top: 1.5rem;">
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="text" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Cardholder Name</label>
+                    <input type="text" placeholder="John Doe">
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" onclick="processPayment()">
+                Start Premium Subscription - $19.99/month
+            </button>
+            
+            <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--text-light);">
+                Cancel anytime. No hidden fees. Secure payment processing.
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Interface -->
+    <div class="chat-interface" id="chatInterface">
+        <div class="chat-header">
+            <div>
+                <strong id="chatUserName">Sarah Johnson</strong>
+                <div style="font-size: 0.8rem; opacity: 0.8;">Online</div>
+            </div>
+            <button onclick="toggleChat()" style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message received">
+                <div>Hey! Thanks for liking my profile! 😊</div>
+                <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 0.25rem;">2:30 PM</div>
+            </div>
+            <div class="message sent">
+                <div>Hi Sarah! I love your photography work. Do you have any favorite spots for shooting?</div>
+                <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 0.25rem;">2:32 PM</div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatMessageInput" placeholder="Type a message..." onkeypress="handleChatKeyPress(event)">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        // User State Management
+        let currentUser = null;
+        let isLoggedIn = false;
+        let userPlan = 'free'; // 'free', 'premium', 'vip'
+        let dailyLikes = 0;
+        let maxDailyLikes = 5; // Free plan limit
+        let selectedPaymentMethod = null;
+        let selectedPlan = null;
+
+        // Subscription Plans
+        const plans = {
+            free: {
+                name: 'Free',
+                price: 0,
+                features: ['Basic profile', 'Limited likes (5/day)', 'Basic matching'],
+                maxDailyLikes: 5
+            },
+            premium: {
+                name: 'Premium',
+                price: 19.99,
+                features: ['Unlimited likes', 'See who liked you', 'Advanced filters', 'Read receipts'],
+                maxDailyLikes: -1 // Unlimited
+            },
+            vip: {
+                name: 'VIP',
+                price: 39.99,
+                features: ['Everything in Premium', 'Personal matchmaker', 'Exclusive events'],
+                maxDailyLikes: -1 // Unlimited
+            }
+        };
+
+        // Sample user data
+        const users = {
+            'sarah': {
+                name: 'Sarah Johnson',
+                age: 28,
+                avatar: '👩🏻‍💼',
+                online: true,
+                premium: true
+            },
+            'michael': {
+                name: 'Michael Chen',
+                age: 32,
+                avatar: '👨🏽‍💻',
+                online: true,
+                premium: false
+            },
+            'emma': {
+                name: 'Emma Williams',
+                age: 26,
+                avatar: '👩🏾‍🎨',
+                online: true,
+                premium: false
+            }
+        };
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Authentication Functions
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Simulate login
+            if (email && password) {
+                simulateLoading('Logging in...', () => {
+                    isLoggedIn = true;
+                    currentUser = {
+                        name: 'John Doe',
+                        email: email,
+                        avatar: 'JD',
+                        plan: 'free'
+                    };
+                    userPlan = 'free';
+                    updateAuthState();
+                    updateSubscriptionStatus();
+                    closeModal('loginModal');
+                    showNotification('Welcome back! You are now logged in.', 'success');
+                });
+            }
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('signupEmail').value;
+
+            simulateLoading('Creating your account...', () => {
+                isLoggedIn = true;
+                currentUser = {
+                    name: `${firstName} ${lastName}`,
+                    email: email,
+                    avatar: `${firstName[0]}${lastName[0]}`,
+                    plan: 'free'
+                };
+                userPlan = 'free';
+                updateAuthState();
+                updateSubscriptionStatus();
+                closeModal('signupModal');
+                showNotification('Account created successfully! Welcome to LoveConnect!', 'success');
+            });
+        }
+
+        function updateAuthState() {
+            const authButtons = document.querySelector('.auth-buttons');
+            const userInfo = document.querySelector('.user-info');
+
+            if (isLoggedIn) {
+                authButtons.style.display = 'none';
+                userInfo.style.display = 'flex';
+                userInfo.querySelector('.user-name').textContent = `Welcome, ${currentUser.name.split(' ')[0]}!`;
+                userInfo.querySelector('.user-avatar').textContent = currentUser.avatar;
+            } else {
+                authButtons.style.display = 'flex';
+                userInfo.style.display = 'none';
+            }
+        }
+
+        function updateSubscriptionStatus() {
+            const statusElement = document.querySelector('.subscription-status');
+            if (statusElement) {
+                statusElement.className = `subscription-status ${userPlan}`;
+                statusElement.textContent = `${plans[userPlan].name} Plan`;
+            }
+        }
+
+        // Subscription Functions
+        function selectPlan(planType) {
+            if (planType === 'free') {
+                showNotification('You are already on the Free plan!', 'success');
+                return;
+            }
+
+            if (!isLoggedIn) {
+                showNotification('Please login to upgrade your plan.', 'error');
+                openModal('loginModal');
+                return;
+            }
+
+            // Store selected plan and open payment modal
+            selectedPlan = planType;
+            updatePaymentModal(planType);
+            openModal('paymentModal');
+        }
+
+        function updatePaymentModal(planType) {
+            const plan = plans[planType];
+            const modal = document.getElementById('paymentModal');
+            
+            // Update price display
+            const priceElement = modal.querySelector('div[style*="font-size: 2.5rem"]');
+            priceElement.textContent = `${plan.price}/month`;
+            
+            // Update button text
+            const button = modal.querySelector('button[onclick="processPayment()"]');
+            button.textContent = `Start ${plan.name} Subscription - ${plan.price}/month`;
+        }
+
+        function selectPaymentMethod(method) {
+            // Remove previous selection
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            event.target.closest('.payment-option').classList.add('selected');
+            selectedPaymentMethod = method;
+            
+            // Show/hide credit card form
+            const stripeForm = document.getElementById('stripe-form');
+            if (method === 'stripe') {
+                stripeForm.style.display = 'block';
+            } else {
+                stripeForm.style.display = 'none';
+            }
+        }
+
+        function processPayment() {
+            if (!selectedPaymentMethod) {
+                showNotification('Please select a payment method.', 'error');
+                return;
+            }
+
+            const button = event.target;
+            const originalText = button.textContent;
+            
+            button.innerHTML = '<span class="spinner"></span>Processing payment...';
+            button.disabled = true;
+
+            // Simulate payment processing
+            setTimeout(() => {
+                userPlan = selectedPlan;
+                currentUser.plan = selectedPlan;
+                maxDailyLikes = plans[selectedPlan].maxDailyLikes;
+                
+                updateSubscriptionStatus();
+                closeModal('paymentModal');
+                
+                button.textContent = originalText;
+                button.disabled = false;
+                
+                showNotification(`Successfully upgraded to ${plans[selectedPlan].name}! 🎉`, 's
+
+</body>
+</html>
 
 
 
