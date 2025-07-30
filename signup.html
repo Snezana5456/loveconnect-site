@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Регистрация</title>
+</head>
+<body>
+  <h2>Регистрация</h2>
+  <form id="signup-form">
+    <input type="text" id="name" placeholder="Имя" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <button type="submit">Зарегистрироваться</button>
+  </form>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabaseUrl = 'https://nokggxwhycdvjrrjkugej.supabase.co'
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5va2dneHdoeWNkdmpyamt1Z2VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4OTM4NTMsImV4cCI6MjA2OTQ2OTg1M30.h3FBLy-vFilgVcKKS_zXixBjRmYYSLFk94fIVQi_MwQ'
+
+    const supabase = createClient(supabaseUrl, supabaseKey)
+
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const name = document.getElementById('name').value
+      const email = document.getElementById('email').value
+
+      const { data, error } = await supabase
+        .from('users') // название таблицы
+        .insert([{ name, email }])
+
+      if (error) {
+        alert('Ошибка: ' + error.message)
+      } else {
+        alert('Регистрация прошла успешно!')
+      }
+    })
+  </script>
+</body>
+</html>
