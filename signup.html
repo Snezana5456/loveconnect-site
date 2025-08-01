@@ -2,73 +2,23 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Регистрация / Вход</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .form-container {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 400px;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #ff4081;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-    button {
-      width: 100%;
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1em;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 </head>
 <body>
   <div class="form-container">
     <h2>Регистрация / Вход</h2>
     <input type="email" id="email" placeholder="Электронная почта" />
     <input type="password" id="password" placeholder="Пароль" />
-    <input type="text" id="name" placeholder="Имя" />
-    <input type="date" id="dob" />
-    <select id="gender">
-      <option value="">Пол</option>
-      <option value="Мужской">Мужской</option>
-      <option value="Женский">Женский</option>
-    </select>
-    <textarea id="about" placeholder="О себе..."></textarea>
     <button id="signupBtn">Зарегистрироваться</button>
     <button id="loginBtn">Войти</button>
     <button id="logoutBtn">Выйти</button>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyCq9EW1JNuJmqn1kZyMHyB0u5AGnuXwCeQ",
@@ -79,6 +29,7 @@
       appId: "1:1013998982426:web:7b6df475ff7063a29308a3",
       measurementId: "G-9F0PESYHMH"
     };
+
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
@@ -86,20 +37,21 @@
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       auth.createUserWithEmailAndPassword(email, password)
-        .then(user => alert('Успешная регистрация'))
-        .catch(err => alert('Ошибка: ' + err.message));
+        .then(() => alert('Регистрация успешна'))
+        .catch(error => alert('Ошибка: ' + error.message));
     };
 
     document.getElementById('loginBtn').onclick = () => {
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       auth.signInWithEmailAndPassword(email, password)
-        .then(user => alert('Вход выполнен'))
-        .catch(err => alert('Ошибка: ' + err.message));
+        .then(() => alert('Вход выполнен'))
+        .catch(error => alert('Ошибка: ' + error.message));
     };
 
     document.getElementById('logoutBtn').onclick = () => {
-      auth.signOut().then(() => alert('Вы вышли'));
+      auth.signOut()
+        .then(() => alert('Вы вышли из аккаунта'));
     };
   </script>
 </body>
