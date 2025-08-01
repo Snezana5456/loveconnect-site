@@ -1,161 +1,71 @@
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LoveConnect — Регистрация</title>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: linear-gradient(to right, #ffb6c1, #add8e6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+  const firebaseConfig = {
+    apiKey: "AIzaSyCq9EW1JNuJmqn1kZyMHyB0u5AGnuXwCeQ",
+    authDomain: "loveconnect-e7435.firebaseapp.com",
+    projectId: "loveconnect-e7435",
+    storageBucket: "loveconnect-e7435.firebasestorage.app",
+    messagingSenderId: "1013998982426",
+    appId: "1:1013998982426:web:7b6df475ff7063a29308a3",
+    measurementId: "G-9F0PESYHMH"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  async function signup() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const name = document.getElementById("name").value;
+    const dob = document.getElementById("dob").value;
+    const gender = document.getElementById("gender").value;
+    const about = document.getElementById("about").value;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        email,
+        name,
+        dob,
+        gender,
+        about,
+      });
+
+      alert("Регистрация успешна!");
+    } catch (error) {
+      alert("Ошибка регистрации: " + error.message);
     }
-    .form-box {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  async function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Вход выполнен!");
+    } catch (error) {
+      alert("Ошибка входа: " + error.message);
     }
-    input, select, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #bb377d;
-      color: white;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #9e2c64;
-    }
-    #profile {
-      display: none;
-      margin-top: 20px;
-      background: #f4f4f4;
-      padding: 15px;
-      border-radius: 8px;
-    }
-  </style>
-</head>
-<body>
-  <div class="form-box">
-    <h2>Регистрация / Вход</h2>
-    <input type="email" id="email" placeholder="Электронная почта">
-    <input type="password" id="password" placeholder="Пароль">
-    <input type="text" id="full_name" placeholder="Имя">
-    <input type="date" id="birth_date">
-    <select id="gender">
-      <option value="">Пол</option>
-      <option value="male">Мужской</option>
-      <option value="female">Женский</option>
-    </select>
-    <textarea id="bio" placeholder="О себе..."></textarea>
-    <button onclick="signup()">Зарегистрироваться</button>
-    <button onclick="login()">Войти</button>
-    <button onclick="logout()">Выйти</button>
+  }
 
-    <div id="profile">
-      <h3>Профиль</h3>
-      <p><strong>Имя:</strong> <span id="p_name"></span></p>
-      <p><strong>Email:</strong> <span id="p_email"></span></p>
-      <p><strong>Дата рождения:</strong> <span id="p_birth"></span></p>
-      <p><strong>Пол:</strong> <span id="p_gender"></span></p>
-      <p><strong>О себе:</strong> <span id="p_bio"></span></p>
-    </div>
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCq9EW1JNuJmqn1kZyMHyB0u5AGnuXwCeQ",
-      authDomain: "loveconnect-e7435.firebaseapp.com",
-      projectId: "loveconnect-e7435",
-      storageBucket: "loveconnect-e7435.firebasestorage.app",
-      messagingSenderId: "1013998982426",
-      appId: "1:1013998982426:web:7b6df475ff7063a29308a3",
-      measurementId: "G-9F0PESYHMH"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    async function signup() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const full_name = document.getElementById("full_name").value;
-      const birth_date = document.getElementById("birth_date").value;
-      const gender = document.getElementById("gender").value;
-      const bio = document.getElementById("bio").value;
-
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        await setDoc(doc(db, "users", user.uid), {
-          full_name,
-          birth_date,
-          gender,
-          bio,
-          email
-        });
-        alert("Регистрация успешна!");
-        loadProfile(user.uid);
-      } catch (error) {
-        alert("Ошибка регистрации: " + error.message);
-      }
-    }
-
-    async function login() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        alert("Вход выполнен!");
-        loadProfile(user.uid);
-      } catch (error) {
-        alert("Ошибка входа: " + error.message);
-      }
-    }
-
-    async function logout() {
+  async function logout() {
+    try {
       await signOut(auth);
-      alert("Вы вышли из аккаунта");
-      document.getElementById("profile").style.display = "none";
+      alert("Вы вышли из аккаунта.");
+    } catch (error) {
+      alert("Ошибка выхода: " + error.message);
     }
+  }
 
-    async function loadProfile(uid) {
-      const docRef = doc(db, "users", uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        document.getElementById("p_name").textContent = data.full_name;
-        document.getElementById("p_email").textContent = data.email;
-        document.getElementById("p_birth").textContent = data.birth_date;
-        document.getElementById("p_gender").textContent = data.gender;
-        document.getElementById("p_bio").textContent = data.bio;
-        document.getElementById("profile").style.display = "block";
-      }
-    }
-  </script>
-</body>
-</html>
+  // Назначение событий
+  document.getElementById("signupBtn")?.addEventListener("click", signup);
+  document.getElementById("loginBtn")?.addEventListener("click", login);
+  document.getElementById("logoutBtn")?.addEventListener("click", logout);
+</script>
