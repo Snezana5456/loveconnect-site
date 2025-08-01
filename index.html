@@ -4,134 +4,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LoveConnect — Регистрация</title>
+  <title>LoveConnect — Главная</title>
   <style>
     body {
-      font-family: sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #ffb6c1, #add8e6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-    .form-box {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      max-width: 400px;
-      width: 100%;
-    }
-    input, select, textarea, button {
-      width: 100%;
-      margin: 8px 0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      background: #ff4f81;
+      font-family: sans-serif;
+      background: linear-gradient(to bottom, #fbd3e9, #bb377d);
       color: white;
-      border: none;
-      cursor: pointer;
+      text-align: center;
+      padding: 50px 20px;
     }
-    button:hover {
-      background: #e03e6f;
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
     }
-    #profile {
-      margin-top: 20px;
-      background: #f0f0f0;
-      padding: 10px;
-      border-radius: 5px;
-      display: none;
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 12px 24px;
+      background: white;
+      color: #bb377d;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    a.button:hover {
+      background: #ffe3f1;
     }
   </style>
 </head>
 <body>
-  <div class="form-box">
-    <h2>Регистрация / Вход</h2>
-    <input type="email" id="email" placeholder="Электронная почта">
-    <input type="password" id="password" placeholder="Пароль">
-    <input type="text" id="full_name" placeholder="Имя">
-    <input type="date" id="birth_date">
-    <select id="gender">
-      <option value="">Пол</option>
-      <option value="male">Мужской</option>
-      <option value="female">Женский</option>
-    </select>
-    <textarea id="bio" placeholder="О себе..."></textarea>
-    <button id="signup">Зарегистрироваться</button>
-    <button id="signin">Войти</button>
-    <button id="signout" style="display:none;">Выйти</button>
-
-    <div id="profile">
-      <h3>Профиль</h3>
-      <p><strong>Имя:</strong> <span id="p_name"></span></p>
-      <p><strong>Email:</strong> <span id="p_email"></span></p>
-      <p><strong>Дата рождения:</strong> <span id="p_birth"></span></p>
-      <p><strong>Пол:</strong> <span id="p_gender"></span></p>
-      <p><strong>О себе:</strong><br><span id="p_bio"></span></p>
-    </div>
-  </div>
-
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-    const supabase = createClient(
-      'https://nokgexwhycdvjrrjkugej.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5va2dneHdoeWNkdmpyamt1Z2VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4OTM4NTMsImV4cCI6MjA2OTQ2OTg1M30.h3FBLy-vFilgVcKKS_zXixBjRmYYSLFk94fIVQi_MwQ'
-    )
-
-    const email = document.getElementById('email')
-    const password = document.getElementById('password')
-    const full_name = document.getElementById('full_name')
-    const birth_date = document.getElementById('birth_date')
-    const gender = document.getElementById('gender')
-    const bio = document.getElementById('bio')
-
-    document.getElementById('signup').onclick = async () => {
-      const { data, error } = await supabase.auth.signUp({
-        email: email.value,
-        password: password.value,
-      })
-      if (error) return alert("Ошибка регистрации: " + error.message)
-      await supabase.from("profiles").insert([{
-        id: data.user.id,
-        full_name: full_name.value,
-        birth_date: birth_date.value,
-        gender: gender.value,
-        bio: bio.value
-      }])
-      alert("Вы успешно зарегистрированы!")
-    }
-
-    document.getElementById('signin').onclick = async () => {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.value,
-        password: password.value,
-      })
-      if (error) return alert("Ошибка входа: " + error.message)
-      loadProfile(data.user.id, data.user.email)
-    }
-
-    document.getElementById('signout').onclick = async () => {
-      await supabase.auth.signOut()
-      document.getElementById('signout').style.display = 'none'
-      document.getElementById('profile').style.display = 'none'
-    }
-
-    async function loadProfile(userId, emailVal) {
-      const { data } = await supabase.from("profiles").select("*").eq("id", userId).single()
-      document.getElementById("p_name").textContent = data.full_name
-      document.getElementById("p_email").textContent = emailVal
-      document.getElementById("p_birth").textContent = data.birth_date
-      document.getElementById("p_gender").textContent = data.gender
-      document.getElementById("p_bio").textContent = data.bio
-      document.getElementById('profile').style.display = 'block'
-      document.getElementById('signout').style.display = 'inline-block'
-    }
-  </script>
+  <h1>Добро пожаловать в LoveConnect 💘</h1>
+  <p>Найди любовь. Начни прямо сейчас!</p>
+  <a href="signup.html" class="button">Перейти к регистрации</a>
 </body>
 </html>
